@@ -7,10 +7,9 @@ A spinner wheel that help to make decision on the bucket list.
 
 ## Demo
 
-<img src="https://github.com/ShyeChern/youtube-download/raw/master/gif/demo-download.gif" alt="Demo Download" width="400" height="400"> 
+<img src="https://github.com/ShyeChern/spinner/raw/master/gif/demo-spinner.gif" alt="Demo Spinner" width="400" height="400"> 
 
 ## Todo
 
-- `show alert before cookie timeout`
 
 Feel free to contact me at chern-97@hotmail.com
