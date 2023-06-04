@@ -31,12 +31,14 @@ export default function History() {
 				<Link className="btn btn-primary text-white px-3 py-2 mx-2" href="/">
 					Go Back
 				</Link>
-				<h1 className='mb-0'>Spinner History (Last 10)</h1>
+				<h1 className="mb-0">Spinner History (Last 10)</h1>
 			</div>
 			{isLoading && (
-				<Spinner animation="border" role="status">
-					<span className="visually-hidden">Loading...</span>
-				</Spinner>
+				<div className="text-center">
+					<Spinner animation="border" role="status">
+						<span className="visually-hidden">Loading...</span>
+					</Spinner>
+				</div>
 			)}
 			<div className="text-center d-flex justify-content-center pt-3">
 				<div style={{ height: 500, overflowY: 'auto' }}>

@@ -69,7 +69,7 @@ export default function Home() {
 			<main>
 				<div className="text-center d-flex justify-content-center flex-wrap">
 					{isLoading ? (
-						<div className="text-center py-5">
+						<div className="text-center py-5" style={{ width: 400, height: 400 }}>
 							<Spinner animation="border" role="status">
 								<span className="visually-hidden">Loading...</span>
 							</Spinner>
