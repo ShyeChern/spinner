@@ -63,6 +63,9 @@ export default function AddItemModal({ show, setShow, refreshSpinnerWheel }) {
 					</Form.Group>
 				</Modal.Body>
 				<Modal.Footer>
+					<Button variant="secondary" onClick={() => setShow(false)} disabled={isLoading}>
+						Close
+					</Button>
 					<Button variant="primary" type="submit" className="text-white" disabled={isLoading}>
 						{isLoading ? (
 							<Spinner animation="border" role="status">

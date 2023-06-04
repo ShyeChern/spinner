@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Link from 'next/link';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import SpinnerWheel from '@/components/spinnerWheel';
@@ -66,46 +67,43 @@ export default function Home() {
 	return (
 		<>
 			<main>
-				<div className="text-center d-flex">
-					<div className="col-md-9">
-						{isLoading ? (
-							<div className="text-center py-5">
-								<Spinner animation="border" role="status">
-									<span className="visually-hidden">Loading...</span>
-								</Spinner>
-							</div>
-						) : (
-							<SpinnerWheel
-								segments={wheelSegment}
-								isReady={isLogin}
-								onFinished={(winner) => onFinished(winner)}
-							/>
-						)}
-					</div>
-					<div className="col-md-3 align-self-center">
-						{isLogin && (
-							<>
-								<Button
-									variant="primary"
-									className="text-white px-3 py-2"
-									onClick={() => setShowAddItemModal(true)}
-								>
+				<div className="text-center d-flex justify-content-center flex-wrap">
+					{isLoading ? (
+						<div className="text-center py-5">
+							<Spinner animation="border" role="status">
+								<span className="visually-hidden">Loading...</span>
+							</Spinner>
+						</div>
+					) : (
+						<SpinnerWheel
+							segments={wheelSegment}
+							isReady={isLogin}
+							onFinished={(winner) => onFinished(winner)}
+						/>
+					)}
+					{isLogin && (
+						<div className="align-self-center">
+							<div className="d-flex flex-column gx-2">
+								<Button className="text-white px-3 py-2" onClick={() => setShowAddItemModal(true)}>
 									Add Item
 								</Button>
-								<AddItemModal
-									show={showAddItemModal}
-									setShow={setShowAddItemModal}
-									refreshSpinnerWheel={getBucketListApi}
-								/>
-								<ResultModal
-									show={showResultModal}
-									setShow={setShowResultModal}
-									refreshSpinnerWheel={getBucketListApi}
-									result={spinnerWheelResult}
-								/>
-							</>
-						)}
-					</div>
+								<Link className="btn btn-primary text-white px-3 py-2 mt-2" href="/histories">
+									History
+								</Link>
+							</div>
+							<AddItemModal
+								show={showAddItemModal}
+								setShow={setShowAddItemModal}
+								refreshSpinnerWheel={getBucketListApi}
+							/>
+							<ResultModal
+								show={showResultModal}
+								setShow={setShowResultModal}
+								refreshSpinnerWheel={getBucketListApi}
+								result={spinnerWheelResult}
+							/>
+						</div>
+					)}
 				</div>
 			</main>
 

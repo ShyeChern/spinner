@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react';
 import randomColor from 'randomcolor';
 
 export default function SpinnerWheel({ segments, onFinished, isReady }) {
-	const size = 250;
+	let size = 250;
+	let width = 600;
+	let height = 600;
+	let centerX = width / 2;
+	let centerY = height / 2;
+	if (window.innerWidth < 768) {
+		size = 150;
+		width = 400;
+		height = 400;
+		centerX = width / 2;
+		centerY = height / 2;
+	}
 	const isOnlyOnce = false;
 	const primaryColor = 'black';
 	const contrastColor = 'white';
 	const buttonText = 'Spin';
 	const fontFamily = 'Arial';
-	const centerX = 300;
-	const centerY = 300;
-	const height = 650;
-	const width = 600;
 	const upTime = segments.length * 100;
 	const downTime = segments.length * 1000;
 	const timerDelay = segments.length;
@@ -44,8 +51,8 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 		let canvas = document.getElementById('canvas');
 		if (navigator.userAgent.indexOf('MSIE') !== -1) {
 			canvas = document.createElement('canvas');
-			canvas.setAttribute('width', 1000);
-			canvas.setAttribute('height', 600);
+			canvas.setAttribute('width', width);
+			canvas.setAttribute('height', height);
 			canvas.setAttribute('id', 'canvas');
 			document.getElementById('wheel').appendChild(canvas);
 		}

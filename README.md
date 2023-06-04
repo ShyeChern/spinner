@@ -7,7 +7,7 @@ A spinner wheel that help to make decision on the bucket list.
 
 ## Demo
 
-<img src="https://github.com/ShyeChern/spinner/raw/master/gif/demo-spinner.gif" alt="Demo Spinner" width="400" height="400"> 
+<img src="https://github.com/ShyeChern/spinner/raw/master/gif/demo-spinner.gif" alt="Demo Spinner" width="500" height="400"> 
 
 ## Todo
 

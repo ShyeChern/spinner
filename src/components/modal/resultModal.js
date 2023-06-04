@@ -33,6 +33,9 @@ export default function ResultModal({ show, setShow, refreshSpinnerWheel, result
 				Result: {result.name}
 			</Modal.Body>
 			<Modal.Footer>
+				<Button variant="secondary" onClick={() => setShow(false)} disabled={isLoading}>
+					Close
+				</Button>
 				<Button
 					variant="primary"
 					className="text-white"

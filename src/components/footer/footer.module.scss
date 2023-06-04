@@ -1,10 +1,14 @@
 .footer {
 	height: 80px;
 	min-height: 80px;
+	width: 100%;
 	border-top: 1px solid #eaeaea;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: absolute;
+	bottom: 0;
+	background-color: inherit;
 
 	a {
 		display: flex;
