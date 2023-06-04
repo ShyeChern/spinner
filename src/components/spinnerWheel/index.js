@@ -4,13 +4,13 @@ import randomColor from 'randomcolor';
 export default function SpinnerWheel({ segments, onFinished, isReady }) {
 	let size = 250;
 	let width = 600;
-	let height = 600;
+	let height = 650;
 	let centerX = width / 2;
 	let centerY = height / 2;
 	if (window.innerWidth < 768) {
 		size = 150;
 		width = 400;
-		height = 400;
+		height = 450;
 		centerX = width / 2;
 		centerY = height / 2;
 	}
