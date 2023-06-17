@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import randomColor from 'randomcolor';
 
 export default function SpinnerWheel({ segments, onFinished, isReady }) {
-	let size = 250;
-	let width = 600;
-	let height = 650;
+	let size = 200;
+	let width = 550;
+	let height = 550;
 	let centerX = width / 2;
-	let centerY = height / 2;
+	let centerY = height / 2 - 30;
 	if (window.innerWidth < 768) {
 		size = 150;
 		width = 400;
-		height = 450;
+		height = 380;
 		centerX = width / 2;
-		centerY = height / 2;
+		centerY = height / 2 - 30;
 	}
 	const isOnlyOnce = false;
 	const primaryColor = 'black';
@@ -44,7 +44,7 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 
 	const wheelInit = () => {
 		initCanvas();
-		wheelDraw();
+		draw();
 	};
 
 	const initCanvas = () => {
@@ -108,12 +108,6 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 			timerHandle = 0;
 			angleDelta = 0;
 		}
-	};
-
-	const wheelDraw = () => {
-		clear();
-		drawWheel();
-		drawNeedle();
 	};
 
 	const draw = () => {
@@ -202,12 +196,15 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 		ctx.fillStyle = primaryColor;
 		ctx.font = 'bold 1.5em ' + fontFamily;
 		currentSegment = segments[i];
-		isStarted && ctx.fillText(currentSegment, centerX + 10, centerY + size + 50);
+		// Write result to bottom of canvas
+		isStarted && ctx.fillText(currentSegment, centerX, centerY + size + 40);
 	};
+
 	const clear = () => {
 		const ctx = canvasContext;
 		ctx.clearRect(0, 0, width, height);
 	};
+
 	return (
 		<div id="wheel">
 			<canvas

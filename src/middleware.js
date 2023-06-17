@@ -1,15 +1,15 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { cookieName } from '@/constants';
+import { COOKIE_NAME } from '@/constants';
 
 export function middleware(request) {
 	const password = process.env.LOGIN_PASSWORD;
-	if (!request.cookies.has(cookieName)) {
+	if (!request.cookies.has(COOKIE_NAME)) {
 		return new Response('Unauthorized.', {
 			status: 401,
 		});
 	}
-	const cookie = request.cookies.get(cookieName).value;
+	const cookie = request.cookies.get(COOKIE_NAME).value;
 	const valid = bcrypt.compareSync(password, cookie);
 	if (!valid) {
 		const response = new Response('Unauthorized.', {
@@ -17,7 +17,7 @@ export function middleware(request) {
 		});
 		response.headers.set(
 			'Set-Cookie',
-			`${cookieName}=; Path=/; Expires=Wed, 1 Jan 1970 00:00:00 GMT; Secure; HttpOnly`
+			`${COOKIE_NAME}=; Path=/; Expires=Wed, 1 Jan 1970 00:00:00 GMT; Secure; HttpOnly`
 		);
 		return response;
 	}

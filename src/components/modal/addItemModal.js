@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import { BUCKET_LIST_TYPE } from '@/constants';
 const defaultType = 'Food';
 
 export default function AddItemModal({ show, setShow, refreshSpinnerWheel }) {
@@ -57,8 +58,11 @@ export default function AddItemModal({ show, setShow, refreshSpinnerWheel }) {
 					<Form.Group className="mb-3" controlId="type">
 						<Form.Label>Type</Form.Label>
 						<Form.Select value={type} onChange={(e) => setType(e.target.value)}>
-							<option value={'Food'}>Food</option>
-							<option value={'Place'}>Place</option>
+							{BUCKET_LIST_TYPE.map((v, i) => (
+								<option key={i} value={v}>
+									{v}
+								</option>
+							))}
 						</Form.Select>
 					</Form.Group>
 				</Modal.Body>

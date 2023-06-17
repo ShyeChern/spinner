@@ -4,10 +4,12 @@ import axios from 'axios';
 import Link from 'next/link';
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import SpinnerWheel from '@/components/spinnerWheel';
 import LoginModal from '@/components/modal/loginModal';
 import AddItemModal from '@/components/modal/addItemModal';
 import ResultModal from '@/components/modal/resultModal';
+import { BUCKET_LIST_TYPE } from '@/constants';
 
 export default function Home() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +19,7 @@ export default function Home() {
 	const [showAddItemModal, setShowAddItemModal] = useState(false);
 	const [showResultModal, setShowResultModal] = useState(false);
 	const [bucketList, setBucketList] = useState([]);
+	const [bucketListType, setBucketListType] = useState('Food');
 	const [wheelSegment, setWheelSegment] = useState([]);
 	const [spinnerWheelResult, setSpinnerWheelResult] = useState({});
 
@@ -43,7 +46,7 @@ export default function Home() {
 	const getBucketListApi = async () => {
 		setIsLoading(true);
 		try {
-			const res = await axios.get('api/bucket-lists');
+			const res = await axios.get('api/bucket-lists', { params: { type: bucketListType } });
 			setBucketList(res.data);
 			setWheelSegment(res.data.map((v) => v.name));
 		} catch (e) {
@@ -62,7 +65,7 @@ export default function Home() {
 		} else {
 			setShowLoginModal(true);
 		}
-	}, [isLogin]);
+	}, [isLogin, bucketListType]);
 
 	return (
 		<>
@@ -75,11 +78,26 @@ export default function Home() {
 							</Spinner>
 						</div>
 					) : (
-						<SpinnerWheel
-							segments={wheelSegment}
-							isReady={isLogin}
-							onFinished={(winner) => onFinished(winner)}
-						/>
+						<div>
+							<Form.Group className="mb-3" controlId="type">
+								<Form.Label>Type</Form.Label>
+								<Form.Select
+									value={bucketListType}
+									onChange={(e) => setBucketListType(e.target.value)}
+								>
+									{BUCKET_LIST_TYPE.map((v, i) => (
+										<option key={i} value={v}>
+											{v}
+										</option>
+									))}
+								</Form.Select>
+							</Form.Group>
+							<SpinnerWheel
+								segments={wheelSegment}
+								isReady={isLogin}
+								onFinished={(winner) => onFinished(winner)}
+							/>
+						</div>
 					)}
 					{isLogin && (
 						<div className="align-self-center">

@@ -1,3 +1,4 @@
 module.exports = {
-	cookieName: '_sw',
+	COOKIE_NAME: '_sw',
+	BUCKET_LIST_TYPE: ['Food', 'Place'],
 };

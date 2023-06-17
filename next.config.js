@@ -9,10 +9,6 @@ const nextConfig = {
 			},
 		];
 	},
-	experimental: {
-		appDir: true,
-		serverComponentsExternalPackages: ['mongoose'],
-	},
 };
 
 const securityHeaders = [
