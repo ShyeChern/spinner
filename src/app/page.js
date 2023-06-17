@@ -79,19 +79,21 @@ export default function Home() {
 						</div>
 					) : (
 						<div>
-							<Form.Group className="mb-3" controlId="type">
-								<Form.Label>Type</Form.Label>
-								<Form.Select
-									value={bucketListType}
-									onChange={(e) => setBucketListType(e.target.value)}
-								>
-									{BUCKET_LIST_TYPE.map((v, i) => (
-										<option key={i} value={v}>
-											{v}
-										</option>
-									))}
-								</Form.Select>
-							</Form.Group>
+							<div className='w-75 m-auto'>
+								<Form.Group className="mb-3" controlId="type">
+									<Form.Label>Type</Form.Label>
+									<Form.Select
+										value={bucketListType}
+										onChange={(e) => setBucketListType(e.target.value)}
+									>
+										{BUCKET_LIST_TYPE.map((v, i) => (
+											<option key={i} value={v}>
+												{v}
+											</option>
+										))}
+									</Form.Select>
+								</Form.Group>
+							</div>
 							<SpinnerWheel
 								segments={wheelSegment}
 								isReady={isLogin}

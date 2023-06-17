@@ -3,6 +3,8 @@
 ## v1.0.2 (2023-06-17)
 ### Feature
 * Allow to spin base on type
+### Fix
+* Spinner size issue
 
 ## v1.0.1 (2023-06-04)
 ### Feature
