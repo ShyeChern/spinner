@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import randomColor from 'randomcolor';
 
 export default function SpinnerWheel({ segments, onFinished, isReady }) {
@@ -24,44 +24,28 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 	const timerDelay = segments.length;
 	const segColors = randomColor({ count: segments.length });
 	const [isFinished, setFinished] = useState(false);
+	const canvasRef = useRef(null);
 	let currentSegment = '';
 	let winningSegment = '';
-	let isStarted = false;
 	let timerHandle = 0;
 	let angleCurrent = 0;
 	let angleDelta = 0;
-	let canvasContext = null;
 	let maxSpeed = Math.PI / `${segments.length}`;
 	let spinStart = 0;
 	let frames = 0;
 
 	useEffect(() => {
-		wheelInit();
+		draw();
 		setTimeout(() => {
 			window.scrollTo(0, 1);
 		}, 0);
+
+		return () => {
+			clearInterval(timerHandle);
+		};
 	}, []);
 
-	const wheelInit = () => {
-		initCanvas();
-		draw();
-	};
-
-	const initCanvas = () => {
-		let canvas = document.getElementById('canvas');
-		if (navigator.userAgent.indexOf('MSIE') !== -1) {
-			canvas = document.createElement('canvas');
-			canvas.setAttribute('width', width);
-			canvas.setAttribute('height', height);
-			canvas.setAttribute('id', 'canvas');
-			document.getElementById('wheel').appendChild(canvas);
-		}
-		canvas.addEventListener('click', spin, false);
-		canvasContext = canvas.getContext('2d');
-	};
-
 	const spin = () => {
-		isStarted = true;
 		// get random number 0 to segments length
 		winningSegment = segments[Math.floor(Math.random() * segments.length)];
 
@@ -117,9 +101,8 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 	};
 
 	const drawSegment = (key, lastAngle, angle) => {
-		const ctx = canvasContext;
+		const ctx = canvasRef.current.getContext('2d');
 		const value = segments[key];
-		ctx.save();
 		ctx.beginPath();
 		ctx.moveTo(centerX, centerY);
 		ctx.arc(centerX, centerY, size, lastAngle, angle, false);
@@ -138,7 +121,7 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 	};
 
 	const drawWheel = () => {
-		const ctx = canvasContext;
+		const ctx = canvasRef.current.getContext('2d');
 		let lastAngle = angleCurrent;
 		const len = segments.length;
 		const PI2 = Math.PI * 2;
@@ -178,7 +161,7 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 	};
 
 	const drawNeedle = () => {
-		const ctx = canvasContext;
+		const ctx = canvasRef.current.getContext('2d');
 		ctx.lineWidth = 1;
 		ctx.strokeStyle = contrastColor;
 		ctx.fileStyle = contrastColor;
@@ -196,19 +179,19 @@ export default function SpinnerWheel({ segments, onFinished, isReady }) {
 		ctx.fillStyle = primaryColor;
 		ctx.font = 'bold 1.5em ' + fontFamily;
 		currentSegment = segments[i];
-		// Write result to bottom of canvas
-		isStarted && ctx.fillText(currentSegment, centerX, centerY + size + 40);
+		// Write result to bottom of canvas after start spinning
+		winningSegment && ctx.fillText(currentSegment, centerX, centerY + size + 40);
 	};
 
 	const clear = () => {
-		const ctx = canvasContext;
-		ctx.clearRect(0, 0, width, height);
+		canvasRef.current.getContext('2d').clearRect(0, 0, width, height);
 	};
 
 	return (
 		<div id="wheel">
 			<canvas
-				id="canvas"
+				ref={canvasRef}
+				onClick={spin}
 				width={width}
 				height={height}
 				style={{
