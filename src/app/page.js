@@ -19,7 +19,7 @@ export default function Home() {
 	const [showAddItemModal, setShowAddItemModal] = useState(false);
 	const [showResultModal, setShowResultModal] = useState(false);
 	const [bucketList, setBucketList] = useState([]);
-	const [bucketListType, setBucketListType] = useState('Food');
+	const [bucketListType, setBucketListType] = useState(BUCKET_LIST_TYPE[0]);
 	const [wheelSegment, setWheelSegment] = useState([]);
 	const [spinnerWheelResult, setSpinnerWheelResult] = useState({});
 
