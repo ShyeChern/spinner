@@ -1,4 +1,4 @@
 module.exports = {
 	COOKIE_NAME: '_sw',
-	BUCKET_LIST_TYPE: ['Food', 'Place'],
+	BUCKET_LIST_TYPE: ['Food ($)', 'Food ($$)', 'Food ($$$)'],
 };
